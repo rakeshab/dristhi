@@ -10,8 +10,12 @@ import javax.persistence.*;
 @Table(name = "dim_location")
 @NamedQueries({
         @NamedQuery(name = Location.FIND_BY_VILLAGE_SUBCENTER_AND_PHC_IDENTIFIER,
-                query = "select r from Location r, PHC p where r.phc=p.id and r.village=:village and r.subCenter=:subCenter and p.phcIdentifier=:phcIdentifier"),
-        @NamedQuery(name = Location.FIND_BY_ANM_IDENTIFIER,
+                
+                  query = "select r from Location r, PHC p where r.phc=p.id and r.village=:village and r.subCenter=:subCenter and p.phcIdentifier=:phcIdentifier"),
+       
+    
+    
+    @NamedQuery(name = Location.FIND_BY_ANM_IDENTIFIER,
                 query = "select r from Location r, PHC p, SP_ANM a where r.phc=p.id and r.subCenter=a.subCenter and a.anmIdentifier=:anmIdentifier"),
         @NamedQuery(name = Location.FIND_VILLAGES_BY_PHC_AND_SUBCENTER,
                 query = "select r from Location r, PHC p where r.phc = p.id and p.phcIdentifier = :phcIdentifier and r.subCenter =:subCenter")

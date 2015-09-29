@@ -130,9 +130,12 @@ public void formData(List<FormSubmissionDTO> formSubmissionsDTO) throws JSONExce
 						logger.info("res2+++++" + isCon);
 						logger.info("anmid+++++" + anmid);
 
-						formSubmissionService.requestConsultationTest(
-								visittype, visitentityid, entityidEC,
-								anmid);
+//						formSubmissionService.requestConsultationTest(
+//								visittype, visitentityid, entityidEC,
+//								anmid);
+                                                String value="consultationdetails";
+						httpAgent.get(drishtiformdataURL+value+"?visisttype="+visittype+"&visitentityid="+visitentityid+"&entityidEC="+entityidEC+"&anmid="+anmid);
+
 
 						logger.info("invoking a service method");
 						//visit(dataObject);
