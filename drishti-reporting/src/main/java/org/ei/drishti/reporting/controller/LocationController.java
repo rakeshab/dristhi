@@ -43,6 +43,7 @@ public class LocationController {
                     anmLocation.subCenter(),
                     villages);
         }
+        
         return new ResponseEntity<>(villagesDTO, OK);
     }
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.OPTIONS}, value = "/anmvillages")
