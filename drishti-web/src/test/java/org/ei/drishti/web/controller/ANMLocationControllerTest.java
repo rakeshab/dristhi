@@ -30,7 +30,6 @@ public class ANMLocationControllerTest {
    
     @Mock
     private DrishtiUser user;
-   
     private ANMLocationController controller;
 
     @Before
@@ -49,7 +48,9 @@ public class ANMLocationControllerTest {
                                                 asList("village1", "village2", "village3")))));
 
         when(userController.currentUser()).thenReturn(user);
+       
         when(user.getUsername()).thenReturn("demo1");
+        
         when(user.getRoles()).thenReturn(asList("user"));
 
         ResponseEntity<VillagesDTO> response = controller.villagesForANM();
