@@ -34,6 +34,7 @@ public class ANMLocationControllerTest {
     private ANMLocationController controller;
 
     @Before
+    
     public void setUp() throws Exception {
         initMocks(this);
         controller = new ANMLocationController("http://dristhi_reporting_url/villages", userController, httpAgent);
