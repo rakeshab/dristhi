@@ -20,11 +20,14 @@ import static org.mockito.MockitoAnnotations.initMocks;
 public class ANMLocationControllerTest {
 
     @Mock
-    private ANMDetailsService service;
+     private ANMDetailsService service;
+    
     @Mock
     private HttpAgent httpAgent;
+    
     @Mock
     private UserController userController;
+   
     @Mock
     private DrishtiUser user;
    
