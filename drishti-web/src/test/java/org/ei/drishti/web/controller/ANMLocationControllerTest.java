@@ -27,6 +27,7 @@ public class ANMLocationControllerTest {
     private UserController userController;
     @Mock
     private DrishtiUser user;
+   
     private ANMLocationController controller;
 
     @Before
