@@ -30,7 +30,6 @@ public class ANMLocationControllerTest {
    
     @Mock
     private DrishtiUser user;
-
     private ANMLocationController controller;
 
     @Before
