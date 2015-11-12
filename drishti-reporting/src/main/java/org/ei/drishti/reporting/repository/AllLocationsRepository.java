@@ -37,6 +37,10 @@ public class AllLocationsRepository {
         return (Location) dataAccessTemplate.findByNamedQueryAndNamedParam(Location.FIND_BY_ANM_IDENTIFIER,
                 new String[]{"anmIdentifier"}, new Object[]{anmIdentifier}).get(0);
     }
+    public ANMVillages fetchLocationByANMIdentifier(String anmIdentifier) {
+        return (ANMVillages) dataAccessTemplate.findByNamedQueryAndNamedParam(ANMVillages.FIND_BY_USER_ID,
+                new String[]{"anmIdentifier"}, new Object[]{anmIdentifier}).get(0);
+    }
 
     public List fetchVillagesForANM(String anmIdentifier) {
         Location location = fetchByANMIdentifier(anmIdentifier);

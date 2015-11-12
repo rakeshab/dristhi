@@ -58,27 +58,27 @@ public class LocationControllerTest {
     }
     
     
-//    @Test
-//     public void anmVillagestest() throws Exception {
-//      when(anmService.getANMVillages("anm123")).thenReturn(
-//               asList(
-//                   
-//                       new ANMVillages(123,"village1", "sc","phc","asd","sfs",123,2323,32423,21213,2323,2323),
-//                       new ANMVillages(12,"village2", "sc32","phc","asd","sfs",123,2323,32423,21213,2323,2323)
-//                     
-//               ));   
-//           when(anmService.getANMVillages("demo1")).thenReturn((List) anmLocation);
-//        when(anmLocation.user_id()).thenReturn("dsa");
-//        when(anmLocation.user_role()).thenReturn("sc");
-//        when(anmLocation.villages()).thenReturn("PHCX");
-//
-//        ResponseEntity<ANMVillagesDTO> response1;
-//                response1= controller.anmVillages("anm123");
-//
-//        ANMVillagesDTO anmvillagesDT = new ANMVillagesDTO("dsa","PHCX","sc");
-//        assertEquals(anmvillagesDT, response1.getBody());
-//        
-//    }
+    @Test
+     public void anmVillagestest() throws Exception {
+      when(anmService.getANMVillages("anm123")).thenReturn(
+               asList(
+                   
+                       new ANMVillages("village1", "sc","phc","asd","sfs",123,2323,32423,21213,2323,2323),
+                       new ANMVillages("village2", "sc32","phc","asd","sfs",123,2323,32423,21213,2323,2323)
+                     
+               ));   
+           when(anmService.getANMLocation("anm123")).thenReturn(anmLocation);
+        when(anmLocation.user_id()).thenReturn("phc");
+        when(anmLocation.user_role()).thenReturn("sc");
+        when(anmLocation.villages()).thenReturn("village1");
+
+        ResponseEntity<ANMVillagesDTO> response1;
+                response1= controller.anmVillages("anm123");
+
+        ANMVillagesDTO anmvillagesDT = new ANMVillagesDTO("phc","sc","village1");
+        assertEquals(anmvillagesDT, response1.getBody());
+        
+    }
     
      }
      

@@ -41,7 +41,7 @@ public class ReportDataController {
     @ResponseBody
     public String submit(@RequestBody ReportingData reportingData) throws ReportDataMissingException {
         logger.info("Reporting on: " + reportingData);
-        if (ReportDataParameters.SERVICE_PROVIDED_DATA_TYPE.equals(reportingData.type())) {
+    if (ReportDataParameters.SERVICE_PROVIDED_DATA_TYPE.equals(reportingData.type())) {
             throwExceptionIfMandatoryDataIsNotPresentForServiceProvidedReport(reportingData);
             servicesProvidedRepository.save(
                     reportingData.get(ReportDataParameters.ANM_IDENTIFIER),

@@ -25,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import static ch.lambdaj.Lambda.collect;
 import static ch.lambdaj.Lambda.on;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -69,9 +68,11 @@ public class FormDataController {
             String visittype = dataObject.getString("formName");
             logger.info("value of formname " + visittype);
             String user_id = dataObject.getString("anmId");
+            
             anmphoneNumber = anmService.getanmPhoneNumber(user_id).get(0).toString();
             logger.info("value of anmphonenumber from db:" + anmphoneNumber);
 
+           
             if (visittype.equalsIgnoreCase("ec_registration")) {
                 logger.info("visit type" + visittype);
                 formDataHandler.ecRegistration(dataObject, anmphoneNumber);

@@ -33,6 +33,10 @@ public class FormSubmissionDTO {
         this.formDataDefinitionVersion = formDataDefinitionVersion;
     }
 
+    public FormSubmissionDTO(String village1, String sc, String phc, String taluk, String district, String state, String sfsd, String sdf) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public FormSubmissionDTO withServerVersion(String version) {
         this.serverVersion = version;
         return this;
