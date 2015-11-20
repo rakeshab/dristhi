@@ -35,8 +35,7 @@ public class SP_ANM {
     @Column(name = "name")
     private String name;
 
-    private SP_ANM() {
-    }
+   
 
     public SP_ANM(String identifier, String name, String subCenter, Integer phcId) {
         this.anmIdentifier = identifier;
@@ -46,7 +45,11 @@ public class SP_ANM {
     }
 
 
-    public Integer id() {
+    public SP_ANM(int i, String string, int j, String string2, String string4) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Integer id() {
         return id;
     }
 
@@ -62,10 +65,7 @@ public class SP_ANM {
         return subCenter;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        return EqualsBuilder.reflectionEquals(this, o, new String[]{"id"});
-    }
+  
 
     @Override
     public int hashCode() {

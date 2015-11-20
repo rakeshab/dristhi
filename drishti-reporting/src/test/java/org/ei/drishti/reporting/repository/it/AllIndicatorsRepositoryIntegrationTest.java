@@ -18,7 +18,6 @@ public class AllIndicatorsRepositoryIntegrationTest extends ServicesProvidedInte
     @Autowired
     @Qualifier("serviceProvidedIndicatorRepository")
     private AllIndicatorsRepository repository;
-
     @Test
     @Transactional("service_provided")
     @Rollback

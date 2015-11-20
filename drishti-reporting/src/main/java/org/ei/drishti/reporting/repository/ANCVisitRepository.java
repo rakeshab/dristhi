@@ -21,10 +21,7 @@ public class ANCVisitRepository {
 
     private AllServicesProvidedRepository servicesProvidedRepository;
 
-    protected ANCVisitRepository() {
-
-    }
-
+   
     @Autowired
     public ANCVisitRepository(AllServicesProvidedRepository servicesProvidedRepository) {
         this.servicesProvidedRepository = servicesProvidedRepository;

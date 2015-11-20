@@ -1,5 +1,4 @@
 package org.ei.drishti.reporting.repository.it;
-
 import org.ei.drishti.reporting.domain.PHC;
 import org.ei.drishti.reporting.domain.SP_ANM;
 import org.ei.drishti.reporting.domain.ServiceProvider;
@@ -9,9 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-
 import static ch.lambdaj.Lambda.having;
 import static ch.lambdaj.Lambda.on;
 import static ch.lambdaj.Lambda.selectUnique;
@@ -35,9 +32,7 @@ public class AllServiceProvidersRepositoryIntegrationTest extends ServicesProvid
         ServiceProviderType phcServiceProvider = selectUnique(serviceProviderTypes, having(on(ServiceProviderType.class).type(), equalTo(PHC.type())));
         ServiceProvider bheryaPHC = new ServiceProvider(phc.id(), phcServiceProvider);
         template.save(bheryaPHC);
-
         ServiceProvider serviceProvider = repository.fetchBy(phc.phcIdentifier(), PHC);
-
         assertEquals(phc.id(), serviceProvider.serviceProviderId());
         assertTrue("ID should be non-zero.", serviceProvider.id() != 0);
     }
@@ -54,9 +49,7 @@ public class AllServiceProvidersRepositoryIntegrationTest extends ServicesProvid
         ServiceProviderType anmServiceProvider = selectUnique(serviceProviderTypes, having(on(ServiceProviderType.class).type(), equalTo(ANM.type())));
         ServiceProvider bheryaANM = new ServiceProvider(anm.id(), anmServiceProvider);
         template.save(bheryaANM);
-
         ServiceProvider serviceProvider = repository.fetchBy(anm.identifier(), ANM);
-
         assertEquals(anm.id(), serviceProvider.serviceProviderId());
         assertTrue("ID should be non-zero.", serviceProvider.id() != 0);
     }

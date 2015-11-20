@@ -1,5 +1,6 @@
 package org.ei.drishti.reporting.repository;
 
+import org.ei.drishti.reporting.domain.PHC;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -19,4 +20,5 @@ public class DataAccessTemplate extends HibernateTemplate {
     public Object getUniqueResult(String namedQueryName, String[] parameterNames, Object[] parameterValues) {
         return DataAccessUtils.uniqueResult(findByNamedQueryAndNamedParam(namedQueryName, parameterNames, parameterValues));
     }
+	
 }

@@ -33,12 +33,12 @@ public class SMSController {
         this.httpAgent = httpAgent;
     }
 
+    
+
     public void sendSMSPNC(String phoneNumber, String ecNumber, String wifeName, String registrationType) {
 
         try {
-            logger.info("sms controller invoked");
-
-            logger.info("trying to send sms");
+            
             JSONArray obj1 = new JSONArray();
             obj1.put("tel:" + phoneNumber);
 
@@ -74,9 +74,7 @@ public class SMSController {
     public void sendSMSChild(String phoneNumber, String motherName) {
 
         try {
-            logger.info("sms controller invoked");
-
-            logger.info("trying to send sms");
+          
             JSONArray obj1 = new JSONArray();
             obj1.put("tel:" + phoneNumber);
 

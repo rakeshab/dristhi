@@ -29,9 +29,7 @@ public class AllSP_ANMsRepositoryIntegrationTest extends ServicesProvidedIntegra
         SP_ANM anm2 = new SP_ANM("ANM 2", "anm2 name", "Sub Center 1", phc2.id());
         template.save(anm1);
         template.save(anm2);
-
         List<SP_ANM> anmList = repository.fetchAll();
-
         assertTrue(anmList.containsAll(asList(anm1, anm2)));
     }
 
@@ -49,9 +47,7 @@ public class AllSP_ANMsRepositoryIntegrationTest extends ServicesProvidedIntegra
         template.save(anm1);
         template.save(anm2);
         template.save(anm3);
-
         List<SP_ANM> anmList = repository.fetchAllANMSInSameSC("ANM 1");
-
         assertTrue(anmList.containsAll(asList(anm1, anm2)));
     }
 
@@ -69,9 +65,7 @@ public class AllSP_ANMsRepositoryIntegrationTest extends ServicesProvidedIntegra
         template.save(anm1);
         template.save(anm2);
         template.save(anm3);
-
         List<SP_ANM> anmList = repository.fetchAllANMSInSamePHC("ANM 1");
-
         assertTrue(anmList.containsAll(asList(anm1, anm2)));
     }
 }

@@ -66,7 +66,7 @@ public class ANMVillages {
     private Integer hospital;
     
   
-    private ANMVillages() {
+    public ANMVillages() {
     }
 
     public ANMVillages(Integer id,String villages, String user_role, String user_id,String name,String phone_number,

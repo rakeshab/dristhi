@@ -17,12 +17,10 @@ import org.slf4j.LoggerFactory;
 public class ANMService {
 
     private AllSP_ANMsRepository allANMsRepository;
-    private AllLocationsRepository allLocationsRepository;
-    private static Logger logger = LoggerFactory
+	private AllLocationsRepository allLocationsRepository;
+   
+	private static Logger logger = LoggerFactory
             .getLogger(ANMService.class.toString());
-
-    protected ANMService() {
-    }
 
     @Autowired
     public ANMService(AllSP_ANMsRepository allANMsRepository, AllLocationsRepository allLocationsRepository) {
@@ -39,6 +37,7 @@ public class ANMService {
     public Location getLocation(String anmIdentifier) {
         return allLocationsRepository.fetchByANMIdentifier(anmIdentifier);
     }
+
     @Transactional("service_provided")
     public ANMVillages getANMLocation(String anmIdentifier) {
         return allLocationsRepository.fetchLocationByANMIdentifier(anmIdentifier);
@@ -72,11 +71,12 @@ public class ANMService {
     @Transactional("service_provided")
     public List getPhoneNumber(String entityid) {
         return allLocationsRepository.fetchphonenumber(entityid);
-     }
+    }
 
     @Transactional("service_provided")
     public List getPHCDetails(Integer id) {
-        logger.info("fecth phc" + id);
         return allLocationsRepository.fetchphc(id);
     }
+
+
 }

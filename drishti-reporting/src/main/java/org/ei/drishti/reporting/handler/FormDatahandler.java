@@ -43,14 +43,16 @@ public class FormDatahandler {
     String phoneNumber = "";
 
     @Autowired
-    public void FormDataHandler(DateUtil dateUtil, ANCVisitRepository ancVisitRepository, ANMService anmService, SMSController smsController, VisitService visitService) {
-        this.ancVisitRepository = ancVisitRepository;
-        this.smsController = smsController;
-        this.anmService = anmService;
-        this.visitService = visitService;
-        this.dateUtil = dateUtil;
-
-    }
+	public FormDatahandler(DateUtil dateUtil,
+			ANCVisitRepository ancVisitRepository, ANMService anmService,
+			SMSController smsController, VisitService visitService) {
+		 this.visitService = visitService;
+	        this.dateUtil = dateUtil;
+	        this.ancVisitRepository = ancVisitRepository;
+	        this.anmService = anmService;
+	        this.smsController = smsController;
+		// TODO Auto-generated constructor stub
+	}
 
     public void ecRegistration(JSONObject dataObject, String anmPhoneNumber) throws JSONException {
         String entityId = dataObject.getString("entityId");
@@ -107,6 +109,7 @@ public class FormDatahandler {
         String ptphoneNumber = collect(ancregdetails, on(EcRegDetails.class).phonenumber()).get(0).toString();
         int id = Integer.parseInt(sid);
         logger.info("id from db:" + id);
+        
         if (!phoneNumber.equalsIgnoreCase(ptphoneNumber)) {
 
             ancVisitRepository.ecUpdate(id, phoneNumber);
@@ -265,6 +268,7 @@ public class FormDatahandler {
             visitti = Integer.parseInt(visittime) * 7;
             newdate = dateUtil.dateFormat(datetime, visitti);
             visitno = 3;
+            
         }
         if (visitnum == 3) {
             visittime = collect(visitconf, on(VisitConf.class).anc_visit4_from_week()).get(0).toString();

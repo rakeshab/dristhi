@@ -16,6 +16,7 @@ public class MCTSSMSService {
         this.smsService = smsService;
         this.mctsPhoneNumber = mctsPhoneNumber;
     }
+    
 
     public void send(MCTSServiceCode typeOfService, String thayiCardNumber, LocalDate date) {
         smsService.sendSMS(mctsPhoneNumber, typeOfService.messageFor(thayiCardNumber, date));

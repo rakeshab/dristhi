@@ -6,108 +6,176 @@
 package org.ei.drishti.reporting.service;
 
 import java.util.Arrays;
+
 import static java.util.Arrays.asList;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import junit.framework.Assert;
+
+import org.ei.drishti.common.util.HttpResponse;
+import org.ei.drishti.dto.aggregatorResponse.AggregatorResponseDTO;
+import org.ei.drishti.reporting.domain.ANCVisitDue;
+import org.ei.drishti.reporting.domain.EcRegDetails;
 import org.ei.drishti.reporting.domain.HealthCenter;
+import org.ei.drishti.reporting.domain.PHC;
 import org.ei.drishti.reporting.domain.SP_ANM;
+import org.ei.drishti.reporting.domain.Location;
+import org.ei.drishti.reporting.domain.ANMVillages;
 import org.ei.drishti.reporting.repository.AllLocationsRepository;
 import org.ei.drishti.reporting.repository.AllSP_ANMsRepository;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.stub;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import org.mockito.MockitoAnnotations;
+
+import com.mchange.util.AssertException;
+
 import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
- *
- * @author shridevi
+ * 
+ * @author shrideviLocation
  */
 public class ANMServiceTest {
 
-    @Mock
-    private AllSP_ANMsRepository allANMsRepository;
-    @Mock
-    private AllLocationsRepository allLocationsRepository;
-    
-    private ANMService anmservice;
+	@Mock
+	private AllSP_ANMsRepository allANMsRepository;
 
-    @Before
-    public void testinjectMocks() {
+	@Mock
+	private SP_ANM spanm;
 
-        initMocks(this);
-        anmservice = new ANMService(allANMsRepository, allLocationsRepository);
-    }
+	@Mock
+	private Location location;
 
-    @Test
-    public void testFindAll() throws Exception {
-        List all = new LinkedList();
+	@Mock
+	private ANMVillages anmvillages;
 
-        when(allANMsRepository.fetchAll()).thenReturn(all);
+	@Mock
+	private AllLocationsRepository allLocationsRepository;
 
-    }
+	private ANMService anmservice;
 
-    @Test
-    public void testanmvillages() throws Exception {
-        List al = new LinkedList();
+	@Before
+	public void setup() {
 
-        when(allLocationsRepository.fetchVillagesForANM("")).thenReturn(al);
+		MockitoAnnotations.initMocks(this);
+		anmservice = new ANMService(allANMsRepository, allLocationsRepository);
 
-    }
+	}
 
-    @Test
-    public void testanmsInTheSameSC() throws Exception {
-        List alO = new LinkedList();
+	@Test
+	public void getLocationTest() throws Exception {
 
-        when(allANMsRepository.fetchAllANMSInSameSC("")).thenReturn(alO);
+		PHC phc = null;
+		Location location = new Location(123, "sdaf", "sadf", phc, "taluka",
+				"district", "sdaf");
+		when(allLocationsRepository.fetchByANMIdentifier("anm123")).thenReturn(
+				location);
+		Location location1 = anmservice.getLocation("anm123");
+		assertEquals(location, location1);
 
-    }
+	}
 
-    @Test
-    public void testanmsInTheSamePHC() throws Exception {
-        List alOa = new LinkedList();
+	@Test
+	public void getANMLocationTest() throws Exception {
 
-        when(allANMsRepository.fetchAllANMSInSamePHC("")).thenReturn(alOa);
+		ANMVillages anmvillages = new ANMVillages(2314, "SFD", "sda", "ewr",
+				"rew", "tre", 324, 234, 43, 43, 54, 453);
+		when(allLocationsRepository.fetchLocationByANMIdentifier("anm123"))
+				.thenReturn(anmvillages);
 
-    }
+		ANMVillages anmvillages1 = anmservice.getANMLocation("anm123");
+		assertEquals(anmvillages, anmvillages1);
 
-    @Test
-    public void testgetANMVillages() throws Exception {
-        List alOap = new LinkedList();
+	}
 
-        when(allLocationsRepository.fetchANMVillages("")).thenReturn(alOap);
+	@Test
+	public void alltest() throws Exception {
 
-    }
-    
-    
-    @Test
-    public void testgetanmPhoneNumber() throws Exception {
-        List als = new LinkedList();
+		List<SP_ANM> spanmlist = allANMsRepository.fetchAll();
+		List<SP_ANM> spanm = anmservice.all();
+		Assert.assertEquals(spanmlist, spanm);
+	}
 
-        when(allLocationsRepository.fetchANMphonenumber("")).thenReturn(als);
+	@Test
+	public void getVillagesForANMTest() {
+		PHC phc = null;
+		Location location = new Location(213, "village", "subCenter", phc,
+				"taluka", "district", "state");
 
-    }
-    
-    @Test
-    public void testgetPhoneNumber() throws Exception {
-        List alf = new LinkedList();
+		List<Location> detailsa = anmservice.getVillagesForANM("anm123");
+		assertEquals(location, detailsa);
+	}
 
-        when(allLocationsRepository.fetchphonenumber("")).thenReturn(alf);
+	@Test
+	public void anmsInTheSamePHCTest() {
 
-    }
-    
-     @Test
-    public void testgetPHCDetails() throws Exception {
-        List alg = new LinkedList();
+		SP_ANM spanm = new SP_ANM("identifier", "name", "subCenter", 23423);
 
-        when(allLocationsRepository.fetchphc(32)).thenReturn(alg);
+		List<SP_ANM> detailsaa = anmservice.anmsInTheSamePHC("anm123");
+		assertEquals(location, detailsaa);
+	}
 
-    }
-    
+	@Test
+	public void getANMVillagesTest() {
+
+		ANMVillages anmvillages = new ANMVillages(123, "villages", "role",
+				"user_id", "name", "phone_number", 1234, 456, 789, 53753, 2341,
+				3215);
+
+		List<SP_ANM> detailsaa = anmservice.getANMVillages("anm123");
+		assertEquals(anmvillages, detailsaa);
+	}
+
+	@Test
+	public void getanmPhoneNumberTest() {
+
+		ANMVillages anmvillages = new ANMVillages(123, "villages", "role",
+				"user_id", "name", "phone_number", 1234, 456, 789, 53753, 2341,
+				3215);
+
+		List<ANMVillages> detailsaa = anmservice.getanmPhoneNumber("user1");
+		assertEquals(anmvillages, detailsaa);
+	}
+
+	@Test
+	public void getPhoneNumberTest() {
+
+		EcRegDetails ecRegDetails = new EcRegDetails("entityid", "222");
+
+		List<EcRegDetails> detasaa = anmservice.getPhoneNumber("entityid");
+		assertEquals(ecRegDetails, detasaa);
+	}
+
+	@Test
+	public void getPHCDetailsTest() {
+		HealthCenter healthCenter = new HealthCenter(125, "hospital_name",
+				"hospital_type", "hospital_address", "parent_hospital",
+				"villages", 4555, 522, 56, 855);
+
+		List<HealthCenter> detilsaa = anmservice.getPHCDetails(12123);
+		assertEquals(healthCenter, detilsaa);
+	}
+
+	@Test
+	public void anmsInTheSameSCTest() {
+		SP_ANM spanm = new SP_ANM("ientifier", "nme", "suCenter", 2423);
+
+		List<SP_ANM> dtilsaa = anmservice.anmsInTheSameSC("anm123");
+		assertEquals(spanm, dtilsaa);
+	}
 
 }

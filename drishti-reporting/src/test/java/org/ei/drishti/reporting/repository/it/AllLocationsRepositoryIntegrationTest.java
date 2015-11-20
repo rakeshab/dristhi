@@ -1,5 +1,4 @@
 package org.ei.drishti.reporting.repository.it;
-
 import org.ei.drishti.reporting.domain.Location;
 import org.ei.drishti.reporting.domain.PHC;
 import org.ei.drishti.reporting.domain.SP_ANM;
@@ -8,16 +7,13 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 public class AllLocationsRepositoryIntegrationTest extends ServicesProvidedIntegrationTestBase {
     @Autowired
     private AllLocationsRepository repository;
-
     @Test
     @Transactional("service_provided")
     @Rollback
@@ -30,9 +26,7 @@ public class AllLocationsRepositoryIntegrationTest extends ServicesProvidedInteg
         Location anotherLocation = new Location("Keelanapura", "Sub Center 2", anotherPHC, "taluka", "mysore", "karnataka");
         template.save(location);
         template.save(anotherLocation);
-
         Location fetchedLocation = repository.fetchBy("Bherya", "Sub Center", "PHC X");
-
         assertEquals("Bherya", fetchedLocation.village());
         assertEquals("Sub Center", fetchedLocation.subCenter());
         assertEquals(phc, fetchedLocation.phc());
@@ -60,9 +54,7 @@ public class AllLocationsRepositoryIntegrationTest extends ServicesProvidedInteg
         template.save(anm);
         template.save(anotherANMForPHCX);
         template.save(anmForPHCY);
-
         Location fetchedLocation = repository.fetchByANMIdentifier("anm1");
-
         assertEquals("Bherya", fetchedLocation.village());
         assertEquals("Sub Center", fetchedLocation.subCenter());
         assertEquals(phc, fetchedLocation.phc());
@@ -85,15 +77,12 @@ public class AllLocationsRepositoryIntegrationTest extends ServicesProvidedInteg
         Location anotherVillageInBheryaPHC = new Location("Village", "Sub Center 2", phc, "taluka", "mysore", "karnataka");
         Location villageInKeelanpuraPHC = new Location("Keelanapura", "Sub Center 2", anotherPHC, "taluka", "mysore", "karnataka");
         SP_ANM anm = new SP_ANM("anm1", "anm1 name", "Sub Center 1", phc.id());
-
         template.save(village1InBheryaPHC);
         template.save(village2InBheryaPHC);
         template.save(anotherVillageInBheryaPHC);
         template.save(villageInKeelanpuraPHC);
         template.save(anm);
-
         List villages = repository.fetchVillagesForANM(anm.identifier());
-
         assertEquals(2, villages.size());
         assertTrue(villages.contains(new Location("Village 1", "Sub Center 1", phc, "taluka", "mysore", "karnataka")));
         assertTrue(villages.contains(new Location("Village 2", "Sub Center 1", phc, "taluka", "mysore", "karnataka")));

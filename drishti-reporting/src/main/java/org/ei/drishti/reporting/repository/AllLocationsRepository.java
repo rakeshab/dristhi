@@ -1,10 +1,12 @@
 package org.ei.drishti.reporting.repository;
 
 import java.util.List;
+
 import org.ei.drishti.reporting.domain.ANMVillages;
 import org.ei.drishti.reporting.domain.EcRegDetails;
 import org.ei.drishti.reporting.domain.HealthCenter;
 import org.ei.drishti.reporting.domain.Location;
+import org.ei.drishti.reporting.domain.SP_ANM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,7 @@ public class AllLocationsRepository {
     private static Logger logger = LoggerFactory
             .getLogger(AllLocationsRepository.class.toString());
 
-    protected AllLocationsRepository() {
-    }
-
+  
     @Autowired
     public AllLocationsRepository(@Qualifier("serviceProvidedDataAccessTemplate") DataAccessTemplate dataAccessTemplate) {
         this.dataAccessTemplate = dataAccessTemplate;
@@ -72,4 +72,8 @@ public class AllLocationsRepository {
         return dataAccessTemplate.findByNamedQueryAndNamedParam(HealthCenter.FIND_BY_ID,
                 new String[]{"id"}, new Object[]{id});
     }
+
+   
+
+	
 }

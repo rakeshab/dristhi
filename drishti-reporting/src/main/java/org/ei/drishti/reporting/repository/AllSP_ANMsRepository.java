@@ -36,4 +36,8 @@ public class AllSP_ANMsRepository {
         return (List<SP_ANM>) dataAccessTemplate.findByNamedQueryAndNamedParam(SP_ANM.FIND_ANMS_IN_SAME_PHC,
                 new String[]{"anmIdentifier"}, new Object[]{anmIdentifier});
     }
+
+    public void fetchAll(int i, String sdaf, int i0, String dfssd, String dsf) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

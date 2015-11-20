@@ -45,7 +45,7 @@ public class Location {
     @Column(name = "state")
     private String state;
 
-    private Location() {
+    public Location() {
     }
 
     public Location(Integer id, String village, String subCenter, PHC phc, String taluka, String district, String state) {

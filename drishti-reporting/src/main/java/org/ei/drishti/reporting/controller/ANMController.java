@@ -1,5 +1,4 @@
 package org.ei.drishti.reporting.controller;
-
 import ch.lambdaj.function.convert.Converter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -20,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import java.util.List;
-
 import static ch.lambdaj.collection.LambdaCollections.with;
 import static org.ei.drishti.reporting.HttpHeaderFactory.allowOrigin;
 import static org.springframework.http.HttpStatus.OK;

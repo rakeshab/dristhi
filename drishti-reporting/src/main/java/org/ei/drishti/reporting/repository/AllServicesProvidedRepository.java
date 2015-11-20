@@ -17,9 +17,7 @@ public class AllServicesProvidedRepository {
     private DataAccessTemplate dataAccessTemplate;
     private static Logger logger = LoggerFactory
             .getLogger(AllServicesProvidedRepository.class.toString());
-
-    protected AllServicesProvidedRepository() {
-    }
+   
 
     @Autowired
     public AllServicesProvidedRepository(@Qualifier("serviceProvidedDataAccessTemplate") DataAccessTemplate dataAccessTemplate) {

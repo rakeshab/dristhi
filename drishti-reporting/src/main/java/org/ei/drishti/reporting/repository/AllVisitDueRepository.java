@@ -24,8 +24,7 @@ public class AllVisitDueRepository {
 	 private static Logger logger = LoggerFactory
 				.getLogger(AllVisitDueRepository.class.toString());
 
-	    protected AllVisitDueRepository() {
-	    }
+	   
 
 	    @Autowired
 	    public AllVisitDueRepository(@Qualifier("serviceProvidedDataAccessTemplate") DataAccessTemplate dataAccessTemplate) {
@@ -42,5 +41,7 @@ public class AllVisitDueRepository {
 	    	logger.info("Fetch visit due details***");
 	        return dataAccessTemplate.findByNamedQuery(VisitConf.FIND_VISIT_CONF);
 	    }
+
+ 
 	
 }

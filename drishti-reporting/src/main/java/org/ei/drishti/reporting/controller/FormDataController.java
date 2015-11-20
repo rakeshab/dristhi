@@ -103,7 +103,7 @@ public class FormDataController {
                     || visittype.equalsIgnoreCase("anc_registration_oa")) {
 
                 logger.info("visit type" + visittype);
-
+                
                 formDataHandler.ancRegistration(dataObject, visittype, anmphoneNumber);
 
             }
