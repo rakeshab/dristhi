@@ -12,7 +12,6 @@ import static java.util.Arrays.asList;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
 import junit.framework.Assert;
 
 import org.ei.drishti.common.util.HttpResponse;
