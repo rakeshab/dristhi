@@ -33,7 +33,7 @@ public class SMSController {
         this.httpAgent = httpAgent;
     }
 
-    public void sendSMSPNC(String phoneNumber, String ecNumber, String wifeName, String registrationType) {
+    public void sendSMSPNC(String phoneNumber, String ecNumber, String womenName, String registrationType) {
 
         try {
             logger.info("sms controller invoked");
@@ -41,7 +41,7 @@ public class SMSController {
             logger.info("trying to send sms");
             JSONArray obj1 = new JSONArray();
             obj1.put("tel:" + phoneNumber);
-
+            String wifeName=womenName.replaceAll(" ", "%20");
             String message = "Dear%20" + wifeName + "%2C%20you%20and%20your%20child%20have%20been%20registered%20with%20" + registrationType + "%20number%20" + ecNumber + "%20";
             logger.info("drishti sms url********" + drishtiSMSURL + "******* json obj value*****" + obj1);
             httpAgent.get(drishtiSMSURL + "/?tel=%5B%22tel:" + phoneNumber + "%22%5D&message=%22" + message + "%22");
@@ -52,7 +52,7 @@ public class SMSController {
         }
     }
 
-    public void sendSMSEC(String phoneNumber, String ecNumber, String wifeName, String registrationType) {
+    public void sendSMSEC(String phoneNumber, String ecNumber, String womenName, String registrationType) {
 
         try {
             logger.info("Reg sms controller invoked");
@@ -60,7 +60,7 @@ public class SMSController {
             logger.info("trying to send sms");
             JSONArray obj1 = new JSONArray();
             obj1.put("tel:" + phoneNumber);
-
+            String wifeName=womenName.replaceAll(" ", "%20");
             String message = "Dear%20" + wifeName + "%2C%20you%20have%20been%20registered%20with%20" + registrationType + "%20number%20" + ecNumber + "%20";
             logger.info("drishti sms url********" + drishtiSMSURL + "******* json obj value*****" + obj1);
             httpAgent.get(drishtiSMSURL + "/?tel=%5B%22tel:" + phoneNumber + "%22%5D&message=%22" + message + "%22");
@@ -71,7 +71,7 @@ public class SMSController {
         }
     }
 
-    public void sendSMSChild(String phoneNumber, String motherName) {
+    public void sendSMSChild(String phoneNumber, String womenName) {
 
         try {
             logger.info("sms controller invoked");
@@ -79,7 +79,7 @@ public class SMSController {
             logger.info("trying to send sms");
             JSONArray obj1 = new JSONArray();
             obj1.put("tel:" + phoneNumber);
-
+            String motherName=womenName.replaceAll(" ", "%20");
             String message = "Your%20Child%20have%20been%20registered%20with%20Mother%20Name" + motherName + "%20";
             logger.info("drishti sms url********" + drishtiSMSURL + "******* json obj value*****" + obj1);
             httpAgent.get(drishtiSMSURL + "/?tel=%5B%22tel:" + phoneNumber + "%22%5D&message=%22" + message + "%22");
