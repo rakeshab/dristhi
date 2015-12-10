@@ -1,9 +1,16 @@
 package org.ei.drishti.common.util;
-
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class DoubleUtilTest {
+	private DoubleUtil doubleutil;
+	
+	 @Before
+     public void setUp(){
+		 doubleutil = new DoubleUtil();
+     }
+
     @Test
     public void shouldParseIntSafely() throws Exception {
         Assert.assertEquals(0.1D, DoubleUtil.tryParse("", 0.1D), 0D);

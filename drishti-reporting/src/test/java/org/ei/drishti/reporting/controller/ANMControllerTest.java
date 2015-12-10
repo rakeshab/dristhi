@@ -27,7 +27,6 @@ public class ANMControllerTest {
 
     @Mock
     private ANMService anmService;
-
     @Mock
     private Location location;
     @Mock
@@ -36,7 +35,6 @@ public class ANMControllerTest {
     private DetailsFetcherFactory detailsFetcherFactory;
     @Mock
     private ANMDetailsFetcher anmDetailsFetcher;
-
     private ANMController controller;
 
     @Before

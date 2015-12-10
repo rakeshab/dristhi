@@ -74,9 +74,9 @@ public class ANCVisitRepository {
 
     }
     @Transactional("service_provided")
-    public void reportinsert(String visitentityid, String entityidec, String patient_name, String anm_id, String activity, String indicator, Integer indicator_count, String date, String location, Integer child_weight, String other_date, String visit_location) {
+    public void reportinsert(String visitentityid, String entityidec, String patient_name, String anm_id, String activity, String indicator, Integer indicator_count, String date, String location, Integer child_weight, String other_date, String visit_location, String dob) {
         logger.info("******anc report repository**");
-        servicesProvidedRepository.reportsave(visitentityid,entityidec, patient_name, anm_id, activity, indicator, indicator_count, date, location, child_weight,other_date,visit_location);
+        servicesProvidedRepository.reportsave(visitentityid,entityidec, patient_name, anm_id, activity, indicator, indicator_count, date, location, child_weight,other_date,visit_location,dob);
                                                 
     }
     

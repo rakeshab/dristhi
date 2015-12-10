@@ -9,7 +9,9 @@ public class HttpResponse {
         this.body = body;
     }
 
-    public boolean isSuccess() {
+  
+
+	public boolean isSuccess() {
         return isSuccess;
     }
 

@@ -1,5 +1,4 @@
 package org.ei.drishti.common.audit;
-
 import org.joda.time.DateTime;
 import org.motechproject.util.DateUtil;
 import org.slf4j.Logger;
@@ -8,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import java.text.MessageFormat;
 import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
-
 import static java.util.Collections.binarySearch;
 import static org.ei.drishti.common.audit.AuditMessageType.NORMAL;
 

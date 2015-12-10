@@ -91,7 +91,7 @@ public class FormSubmissionController {
             @RequestParam("village") String anmVillage,
             @RequestParam("timestamp") Long timeStamp,
             @RequestParam(value = "batch-size", required = false) Integer batchSize) {
-        logger.info("***** from controller&&&&&");
+        logger.info("***** form Submission controller&&&&&");
 //        HttpResponse response = new HttpResponse(false, null);
         List<FormSubmission> newSubmissionsForANM = null;
 
@@ -133,9 +133,10 @@ public class FormSubmissionController {
             if (formSubmissionsDTO.isEmpty()) {
                 return new ResponseEntity<>(BAD_REQUEST);
             }
-            httpAgent.post(url + "/" + formData, formdetails, "application/json");
+            
             gateway.sendEventMessage(new FormSubmissionEvent(formSubmissionsDTO).toEvent());
             logger.debug(format("Added Form submissions to queue.\nSubmissions: {0}", formSubmissionsDTO));
+            httpAgent.post(url + "/" + formData, formdetails, "application/json");
         } catch (Exception e) {
             logger.error(format("Form submissions processing failed with exception {0}.\nSubmissions: {1}", e, formSubmissionsDTO));
             return new ResponseEntity<>(INTERNAL_SERVER_ERROR);

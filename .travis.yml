@@ -13,3 +13,4 @@ script:
   - java -version
   - mvn --version
   - mvn test
+

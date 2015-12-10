@@ -4,17 +4,12 @@
  * and open the template in the editor.
  */
 package org.ei.drishti.reporting.controller;
-
 import java.util.Iterator;
 import java.util.List;
-
 import org.ei.drishti.common.util.DateUtil;
 import org.ei.drishti.dto.form.FormSubmissionDTO;
-//import org.ei.drishti.reporting.domain.ANCVisitDue;
 import org.ei.drishti.reporting.handler.FormDatahandler;
-//import org.ei.drishti.reporting.repository.ANCVisitRepository;
 import org.ei.drishti.reporting.service.ANMService;
-//import org.ei.drishti.reporting.service.VisitService;
 import org.joda.time.LocalDate;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import static ch.lambdaj.Lambda.collect;
 import static ch.lambdaj.Lambda.on;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -37,20 +31,14 @@ public class FormDataController {
     private FormDatahandler formDataHandler;
     private SMSController smsController;
     private DateUtil dateUtil;
-
     private static Logger logger = LoggerFactory
             .getLogger(FormDataController.class.toString());
 
     String phoneNumber = "";
     String ecId = "";
 
+   
     @Autowired
-    public FormDataController(ANMService anmService, FormDatahandler formDataHandler, SMSController smsController) {
-        this.anmService = anmService;
-        this.formDataHandler = formDataHandler;
-        this.smsController = smsController;
-    }
-
     public FormDataController(ANMService anmService2,
 			FormDatahandler formDataHandler2, SMSController smsController2,
 			DateUtil dateUtil2) {
@@ -75,7 +63,6 @@ public class FormDataController {
         while (itr.hasNext()) {
             Object object = (Object) itr.next();
             String jsonstr = object.toString();
-
             JSONObject dataObject = new JSONObject(jsonstr);
             String visittype = dataObject.getString("formName");
             logger.info("value of formname " + visittype);
@@ -103,6 +90,12 @@ public class FormDataController {
                 logger.info("visit type" + visittype);
 
                 formDataHandler.ancEdit(dataObject, anmphoneNumber);
+
+            }
+            if (visittype.equalsIgnoreCase("child_immunizations")) {
+                logger.info("visit type" + visittype);
+
+                formDataHandler.childImmunization(dataObject, visittype);
 
             }
 

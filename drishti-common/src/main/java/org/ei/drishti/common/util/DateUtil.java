@@ -101,6 +101,7 @@ class MockDate implements DateUtility {
         return fakeDay.toLocalDate();
     }
 
+    
     @Override
     public long millis() {
         return fakeDay.getMillis();

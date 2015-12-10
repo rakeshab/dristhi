@@ -75,7 +75,7 @@ public class ANCVisitRepositoryTest {
 	@Test
 	public void reportinsertTest() {
 
-		ancvisitRepository.reportinsert("visitentityid", " entityidec", "patient_name", "anm_id", "activity", "indicator", 42123, "date", "location", 23, "other_date", "visit_location");
+		ancvisitRepository.reportinsert("visitentityid", " entityidec", "patient_name", "anm_id", "activity", "indicator", 42123, "date", "location", 23, "other_date", "visit_location","DOB");
 		
 	}
 	
