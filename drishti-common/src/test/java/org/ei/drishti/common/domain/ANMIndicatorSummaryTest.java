@@ -29,4 +29,20 @@ public class ANMIndicatorSummaryTest {
 	   
 	   anmindicatorSummary.indicator();
    }
+   
+   @Test
+   public void equalsTest(){
+	   Object o = null;
+	anmindicatorSummary.equals(o);
+   }
+   
+   @Test
+   public void hashCodeTest(){
+	   anmindicatorSummary.hashCode();
+   }
+   
+   @Test
+   public void toStringTest(){
+	   anmindicatorSummary.toString();
+   }
 }
