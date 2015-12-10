@@ -619,6 +619,7 @@ public class FormDatahandler {
         String dateOfBirth = "";
         String immunizationsGiven="";
         String weight="";
+        Integer birthWeight=0;
 
         String entityId = dataObject.getString("entityId");
         String anmid = dataObject.getString("anmId");
@@ -690,12 +691,13 @@ public class FormDatahandler {
                 weight = jsonObject.has("value")
                         && jsonObject.getString("value") != null ? jsonObject
                                 .getString("value") : "";
+                birthWeight=Integer.parseInt(weight);
                 
             }
             
         }
         logger.info("immunizationgiven length"+immunizationsGiven.length());
-        Integer birthWeight=Integer.parseInt(weight);
+        
 
         if (visittype.equalsIgnoreCase("child_registration_oa")) {
             logger.info("visittype: child_registration_oa");
