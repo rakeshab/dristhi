@@ -13,8 +13,19 @@ public class CondomFPDetailsDTOTest {
 	}
 	
 	@Test
-	public void test(){
-		//testing
+	public void equalsTest(){
+		Object o = null;
+		condomFPDetailsDTO.equals(o);
+	}
+	
+	@Test
+	public void hashCodeTest(){
+		condomFPDetailsDTO.hashCode();
+	}
+	
+	@Test
+	public void toStringTest(){
+		condomFPDetailsDTO.toString();
 	}
 
 }

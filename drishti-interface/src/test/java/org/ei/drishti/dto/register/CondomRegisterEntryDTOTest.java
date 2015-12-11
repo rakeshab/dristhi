@@ -142,5 +142,21 @@ public class CondomRegisterEntryDTOTest {
 		CondomFPDetailsDTO fpDetails = null;
 		condomRegisterEntryDTO.withFpDetails(fpDetails);
 	}
+	
+	@Test
+	public void equalsTest(){
+		Object o = null;
+		condomRegisterEntryDTO.equals(o);
+	}
+	
+	@Test
+	public void hashCodeTest(){
+		condomRegisterEntryDTO.hashCode();
+	}
+	
+	@Test
+	public void toStringTest(){
+		condomRegisterEntryDTO.toString();
+	}
 
 }

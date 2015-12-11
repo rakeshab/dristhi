@@ -3,29 +3,29 @@ package org.ei.drishti.dto.register;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ECRegisterDTOTest {
+public class ANCRegisterDTOTest {
 	
-	private ECRegisterDTO ecRegisterDTO;
+	private ANCRegisterDTO ancRegisterDTO;
 	
 	@Before
 	public void setUp(){
-		ecRegisterDTO = new ECRegisterDTO(null);
+		ancRegisterDTO = new ANCRegisterDTO(null);
 	}
 	
 	@Test
 	public void equalsTest(){
 		Object o = null;
-		ecRegisterDTO.equals(o);
+		ancRegisterDTO.equals(o);
 	}
 	
 	@Test
 	public void hashCodeTest(){
-		ecRegisterDTO.hashCode();
+		ancRegisterDTO.hashCode();
 	}
 	
 	@Test
 	public void toStringTest(){
-		ecRegisterDTO.toString();
+		ancRegisterDTO.toString();
 	}
 
 }

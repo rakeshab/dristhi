@@ -60,5 +60,21 @@ public class ChildRegisterEntryDTOTest {
 		Map<String, String> vitaminADoses = null;
 		childRegisterEntryDTO.withVitaminADoses(vitaminADoses);
 	}
+	
+	@Test
+	public void equalsTest(){
+		Object o = null;
+		childRegisterEntryDTO.equals(o);
+	}
+	
+	@Test
+	public void hashCodeTest(){
+		childRegisterEntryDTO.hashCode();
+	}
+	
+	@Test
+	public void toStringTest(){
+		childRegisterEntryDTO.toString();
+	}
 
 }

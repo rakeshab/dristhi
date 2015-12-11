@@ -185,4 +185,20 @@ public class ANCRegisterEntryDTOTest {
 		ancRegisterEntryDTO.withANCInvestigations(ancInvestigations);
 	}
 	
+	@Test
+	public void equalsTest(){
+		Object o = null;
+		ancRegisterEntryDTO.equals(o);
+	}
+	
+	@Test
+	public void hashCodeTest(){
+		ancRegisterEntryDTO.hashCode();
+	}
+	
+	@Test
+	public void toStringTest(){
+		ancRegisterEntryDTO.toString();
+	}
+	
 }

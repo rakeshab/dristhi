@@ -13,8 +13,19 @@ public class ChildRegisterDTOTest {
 	}
 	
 	@Test
-	public void test(){
-		//testing
+	public void equalsTest(){
+		Object o = null;
+		childRegisterDTO.equals(o);
+	}
+	
+	@Test
+	public void hashCodeTest(){
+		childRegisterDTO.hashCode();
+	}
+	
+	@Test
+	public void toStringTest(){
+		childRegisterDTO.toString();
 	}
 
 }

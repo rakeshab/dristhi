@@ -13,7 +13,18 @@ public class AggregatedReportsDTOTest {
 	}
 	
 	@Test
-	public void AggregatedReportsDTOTest(){
-		
+	public void equalsTest(){		
+		Object o = null;
+		aggregatedReportsDTO.equals(o);		
+	}
+	
+	@Test
+	public void hashCodeTest(){		
+		aggregatedReportsDTO.hashCode();	
+	}
+	
+	@Test
+	public void toStringTest(){		
+		aggregatedReportsDTO.toString();
 	}
 }

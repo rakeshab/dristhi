@@ -13,8 +13,19 @@ public class ANMDetailDTOTest {
 	}
 	
 	@Test
-	public void test(){
-		//testing
+	public void equalsTest(){
+		Object o = null;
+		anmDetailDTO.equals(o);
+	}
+	
+	@Test
+	public void hashCodeTest(){
+		anmDetailDTO.hashCode();
+	}
+	
+	@Test
+	public void toStringTest(){
+		anmDetailDTO.toString();
 	}
 
 }
