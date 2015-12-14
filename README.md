@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/rakeshab/dristhi.svg?branch=doctor-plugin)](https://travis-ci.org/rakeshab/dristhi)
 
+[![Coverage Status](https://coveralls.io/repos/rakeshab/dristhi/badge.svg?branch=doctor-plugin-test&service=github)](https://coveralls.io/github/rakeshab/dristhi?branch=doctor-plugin-test)
+
 
 <b>For a full server build one needs to configure the environment with technology components/programs to install OpenSRP.</b>
 
