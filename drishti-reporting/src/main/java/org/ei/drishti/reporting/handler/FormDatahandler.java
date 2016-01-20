@@ -4,11 +4,13 @@ import static ch.lambdaj.Lambda.collect;
 import static ch.lambdaj.Lambda.collect;
 import static ch.lambdaj.Lambda.collect;
 import static ch.lambdaj.Lambda.on;
+import static java.text.MessageFormat.format;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import org.ei.drishti.common.util.DateUtil;
+import org.ei.drishti.common.util.HttpAgent;
 import org.ei.drishti.reporting.controller.SMSController;
 import org.ei.drishti.reporting.domain.ANCVisitDue;
 import org.ei.drishti.reporting.domain.ANMVillages;
@@ -34,6 +36,7 @@ public class FormDatahandler {
     private ANCVisitRepository ancVisitRepository;
     private VisitService visitService;
     private DateUtil dateUtil;
+    private HttpAgent httpAgent;
 
     private static Logger logger = LoggerFactory.getLogger((String) FormDatahandler.class.toString());
     String regNumber = "";
@@ -45,13 +48,14 @@ public class FormDatahandler {
     @Autowired
     public FormDatahandler(DateUtil dateUtil2,
 			ANCVisitRepository ancVisitRepository2, ANMService anmService2,
-			SMSController smsController2, VisitService visitService2) {
+			SMSController smsController2, VisitService visitService2,HttpAgent httpAgent) {
     	
     	this.dateUtil = dateUtil2;
     	this.ancVisitRepository = ancVisitRepository2;
     	this.anmService = anmService2;
         this.smsController = smsController2;
         this.visitService = visitService2;
+        this.httpAgent=httpAgent;
       
 	}
 
@@ -126,10 +130,24 @@ public class FormDatahandler {
         if(!currentMethod.equalsIgnoreCase("none")&& !currentMethod.equalsIgnoreCase("none_ps") && !currentMethod.equalsIgnoreCase("none_ss")
             &&!currentMethod.equalsIgnoreCase("dmpa_injectable")&& !currentMethod.equalsIgnoreCase("traditional_methods") && !currentMethod.equalsIgnoreCase("centchroman"))
         {
-            ancVisitRepository.reportinsert("", entityId, wifeName, anmid, "FP", currentMethod, numberOfCondomsSupplied, registrationDate, village, 0, "", "","");
-        }
+            
+            logger.info("test redis");
+            try {
+                String month =dateUtil.getMonthd(this.registrationDate);
+                int y =dateUtil.getYeard(this.registrationDate);
+                String year = Integer.toString(y);
+                logger.info("http://10.10.11.6:8000/redisdb/?user=" + anmid + "&report=" +currentMethod + "&month=" + month + "&year=" + year + "&incr=1");
+                httpAgent.get("http://10.10.11.6:8000/redisdb/?user="+anmid+"&report="+currentMethod+"&month="+month+"&year="+year+"&incr=1");
+                if (currentMethod.equalsIgnoreCase("condom")) {
+                    logger.info("current method: " + currentMethod + "url:\"http://10.10.11.6:8000/redisdb/?user=\"+anmid+\"&report=condompieces&month=" + month + "&year=" + year + "&incr=" + numberOfCondomsSupplied);
+                    httpAgent.get("http://10.10.11.6:8000/redisdb/?user="+anmid+"&report=piecescondom&month="+month+"&year="+year+"&incr="+numberOfCondomsSupplied);
+                }
+            }
+            catch (Exception e) {
+                logger.error("Redis call failed with an exception {0}", e);
+            }
         
-    
+        }
    }
 
     public void recordECP(JSONObject dataObject, String anmPhoneNumber) throws JSONException {
@@ -166,7 +184,15 @@ public class FormDatahandler {
                                 .getString("value") : "";
             }
         }
-        ancVisitRepository.reportinsert("", entityId, wifeName, anmid, "FP", "ecp", numberOfECPsGiven, submissionDate, village, 0, "", "","");
+        try {
+            String month =dateUtil.getMonthd(submissionDate);
+            int year =dateUtil.getYeard(submissionDate);
+            logger.info("http://10.10.11.6:8000/redisdb/?user="+anmid+"&report=oral%20pills&month="+month+"&year="+year+"&incr=1");
+           httpAgent.get("http://10.10.11.6:8000/redisdb/?user="+anmid+"&report=oral%20pills&month="+month+"&year="+year+"&incr="+numberOfECPsGiven);
+        }
+        catch (Exception e) {
+            logger.error(format("Redis call failed with an exception {0}", e));
+        }
     }
 
     public void ecEdit(JSONObject dataObject, String anmPhoneNumber) throws JSONException {
@@ -301,6 +327,9 @@ public class FormDatahandler {
         logger.info("visit time interval:" + visittime);
         int visitti = Integer.parseInt(visittime) * 7;
         String visitdate = dateUtil.dateFormat(edd, visitti);
+        int diff = this.dateUtil.getdiff(this.registrationDate, edd);
+            String month = this.dateUtil.getMonthd(this.registrationDate);
+            int year = this.dateUtil.getYeard(this.registrationDate);
 
         if (visittype.equalsIgnoreCase("anc_registration")) {
             List ancvisitdetails = anmService.getPhoneNumber(entityId);
@@ -310,7 +339,20 @@ public class FormDatahandler {
             logger.info("phonenumber: " + ptphoneNumber);
 
             ancVisitRepository.insert(entityId, ptphoneNumber, anmNumber, "anc_visit", visitnumber, edd, wifeName, visitdate, anmid);
-            ancVisitRepository.reportinsert("", entityId, wifeName, anmid, "anc", "", 0, registrationDate, village, 0, edd, "","");
+            try {
+                httpAgent.get("http://10.10.11.6:8000/redisdb/?user="+anmid+"&report=totalANC&month="+month+"&year="+year+"&incr=1");
+                logger.info("http://10.10.11.6:8000/redisdb/?user="+anmid+"&report=totalANC&month="+month+"&year="+year+"&incr=1");
+                if (diff > 90) {
+                    httpAgent.get("http://10.10.11.6:8000/redisdb/?user="+anmid+"&report=lateANC&month="+month+"&year="+year+"&incr=1");
+                    logger.info("http://10.10.11.6:8000/redisdb/?user=" + anmid + "&report=lateANC&month=" + month + "&year=" + year + "&incr=1");
+                } else {
+                    httpAgent.get("http://10.10.11.6:8000/redisdb/?user="+anmid+"&report=EarlyANC&month="+month+"&year="+year+"&incr=1");
+                    logger.info("\"http://10.10.11.6:8000/redisdb/?user=" + anmid + "&report=EarlyANC&month=" + month + "&year=" + year + "&incr=1");
+                }
+            }
+            catch (Exception e) {
+                logger.error(format("redis repo insert failed with exception{0}" + e));
+            }
         }
         if (visittype.equalsIgnoreCase("anc_registration_oa")) {
             logger.info("trying to send sms");

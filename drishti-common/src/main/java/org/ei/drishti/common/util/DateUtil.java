@@ -1,6 +1,8 @@
 package org.ei.drishti.common.util;
 
+import java.text.DecimalFormat;
 import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.joda.time.Period;
@@ -51,6 +53,32 @@ public class DateUtil {
         DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyy HH:mm:ss.SSSZ");
         String date1 = dtf.print(date);
         return "date1";
+    }
+    
+    public String getMonthd(String datatime){
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
+        // Parsing the date
+        DateTime jodatime = dtf.parseDateTime(datatime);
+        DecimalFormat df = new DecimalFormat("00");
+        return df.format(jodatime.getMonthOfYear());
+                
+    }
+    public int getdiff(String datetime, String datetime2){
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
+        // Parsing the date
+        DateTime jodatime1 = dtf.parseDateTime(datetime);
+        DateTime jodatime2 = dtf.parseDateTime(datetime2);
+        
+        return Days.daysBetween(jodatime1, jodatime2).getDays();
+                
+    }
+    
+    public int getYeard(String datatime){
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
+        // Parsing the date
+        DateTime jodatime = dtf.parseDateTime(datatime);
+        return jodatime.getYear();
+                
     }
 
     public String dateFormat(String datetime, int diff) {
