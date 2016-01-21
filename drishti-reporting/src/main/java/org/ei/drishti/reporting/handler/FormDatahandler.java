@@ -359,7 +359,20 @@ public class FormDatahandler {
             smsController.sendSMSEC(phoneNumber, regNumber, wifeName, "ANC");
             logger.info("sms sent done");
             ancVisitRepository.insert(entityId, phoneNumber, anmNumber, "anc_visit", visitnumber, edd, wifeName, visitdate, anmid);
-            ancVisitRepository.reportinsert("", entityId, wifeName, anmid, "anc", "", 0, registrationDate, village, 0, edd, "","");
+            try {
+                httpAgent.get("http://10.10.11.6:8000/redisdb/?user="+anmid+"&report=totalANC&month="+month+"&year="+year+"&incr=1");
+                logger.info("http://10.10.11.6:8000/redisdb/?user="+anmid+"&report=totalANC&month="+month+"&year="+year+"&incr=1");
+                if (diff > 90) {
+                    httpAgent.get("http://10.10.11.6:8000/redisdb/?user="+anmid+"&report=lateANC&month="+month+"&year="+year+"&incr=1");
+                    logger.info("http://10.10.11.6:8000/redisdb/?user=" + anmid + "&report=lateANC&month=" + month + "&year=" + year + "&incr=1");
+                } else {
+                    httpAgent.get("http://10.10.11.6:8000/redisdb/?user="+anmid+"&report=EarlyANC&month="+month+"&year="+year+"&incr=1");
+                    logger.info("\"http://10.10.11.6:8000/redisdb/?user=" + anmid + "&report=EarlyANC&month=" + month + "&year=" + year + "&incr=1");
+                }
+            }
+            catch (Exception e) {
+                logger.error(format("redis repo insert failed with exception{0}" + e));
+            }
         }
 
     }

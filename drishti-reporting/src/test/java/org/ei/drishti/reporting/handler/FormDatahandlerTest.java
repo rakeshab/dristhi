@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.ei.drishti.common.util.HttpAgent;
 import org.ei.drishti.reporting.domain.ANCVisitDue;
 import org.ei.drishti.reporting.domain.ANMVillages;
 import org.ei.drishti.reporting.domain.EcRegDetails;
@@ -34,6 +35,8 @@ public class FormDatahandlerTest {
 	private ANCVisitRepository ancVisitRepository;
 	@Mock
 	private VisitService visitService;
+        @Mock
+	private HttpAgent httpAgent;
 	@Mock
 	private DateUtil dateUtil;
 
@@ -43,7 +46,7 @@ public class FormDatahandlerTest {
 	@Before
 	public void setUp() {
 		initMocks(this);
-		formDatahandler = new FormDatahandler(dateUtil, ancVisitRepository,anmService, smsController, visitService);
+		formDatahandler = new FormDatahandler(dateUtil, ancVisitRepository,anmService, smsController, visitService,httpAgent);
                 
 
 	}
