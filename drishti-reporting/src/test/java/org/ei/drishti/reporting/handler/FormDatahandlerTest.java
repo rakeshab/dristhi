@@ -216,5 +216,13 @@ public class FormDatahandlerTest {
 		formDatahandler.ttData(dataobject, "anc_registration");
 
 	}
+	
+	@Test
+	public void childImmunizationtest() throws Exception {
+
+		JSONObject dataobject = data();
+		formDatahandler.childImmunization(dataobject, "anc_registration");
+
+	}
 
 }
